@@ -9,10 +9,14 @@ document.addEventListener('DOMContentLoaded', function () {
         '#result'
     ) as HTMLParagraphElement | null
 
+    const resetBtn = document.querySelector(
+        '#action-btn'
+    ) as HTMLButtonElement | null
     const game = new Game()
     game.init({
         resultElement: result,
         counterElement: counter,
         eggElement: egg,
+        actionButtonElement: resetBtn,
     })
 })
