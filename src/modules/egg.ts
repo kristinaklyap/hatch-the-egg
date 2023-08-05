@@ -11,4 +11,8 @@ export class Egg {
         [EggState.Egg, 'assets/egg.svg'],
         [EggState.Tamagotchi, 'assets/tamagotchi.svg'],
     ])
+
+    tapEgg() {
+        this.eggClicks++
+    }
 }

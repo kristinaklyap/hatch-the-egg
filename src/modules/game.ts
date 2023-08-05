@@ -11,6 +11,8 @@ export class Game {
     counterElement: HTMLParagraphElement | null = null
     eggElement: HTMLImageElement | null = null
     eggInstance: Egg = new Egg()
+    stopWatch: number | null = null
+    secondsPassed: number = 0
 
     init(params: GameParams) {
         if (!params.counterElement || !params.eggElement) {
@@ -21,9 +23,7 @@ export class Game {
         this.counterElement = params.counterElement
         this.eggElement = params.eggElement
         this.displayEggClicks()
-        this.displayEgg()
-        console.log(this)
-        console.log('Game started')
+        this.mountEgg()
     }
 
     displayEggClicks() {
@@ -33,7 +33,7 @@ export class Game {
         this.counterElement.innerText = `${this.eggInstance.eggClicks}`
     }
 
-    displayEgg() {
+    mountEgg() {
         if (!this.eggElement) {
             throw new Error('Egg of elements not found')
         }
@@ -44,5 +44,19 @@ export class Game {
         }
 
         this.eggElement.src = eggImageSrc
+        this.eggElement.addEventListener('click', () => {
+            this.eggInstance.tapEgg()
+            this.displayEggClicks()
+            if (!this.stopWatch) {
+                this.startStopWatch()
+            }
+        })
+    }
+
+    startStopWatch() {
+        this.stopWatch = setInterval(() => {
+            this.secondsPassed++
+            console.log('stopwatch started', this.secondsPassed)
+        }, 1000)
     }
 }
